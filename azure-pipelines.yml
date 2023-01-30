@@ -34,7 +34,8 @@ steps:
 #     configuration: '$(buildConfiguration)'
 
 - task: AzureRmWebAppDeployment@4
-  displayName: 'Azure App Service Deploy: '
   inputs:
-    ConnectionType: PublishProfile
-    PublishProfilePassword: k2JK3HJtf4J65eQAd94jwWhovfExjGmojdvEwSTBmJatfoQ5Kp7WLzpwXlKt
+    ConnectionType: 'PublishProfile'
+    PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+    PublishProfilePassword: 'k2JK3HJtf4J65eQAd94jwWhovfExjGmojdvEwSTBmJatfoQ5Kp7WLzpwXlKt'
+    packageForLinux: '$(build.artifactStagingDirectory)\WebApp.zip'
