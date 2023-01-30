@@ -28,7 +28,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+# - task: VSTest@2
+#   inputs:
+#     platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
+
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Azure App Service Deploy: '
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    ConnectionType: PublishProfile
+    PublishProfilePassword: k2JK3HJtf4J65eQAd94jwWhovfExjGmojdvEwSTBmJatfoQ5Kp7WLzpwXlKt
