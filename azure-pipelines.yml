@@ -61,4 +61,4 @@ steps:
     ConnectionType: 'PublishProfile'
     PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*Web Deploy.pubxml'
     PublishProfilePassword: '${{ parameters.pspwd }}'
-    packageForLinux: 'D:\a\1\a\WebApplication1.zip'
+    packageForLinux: 'D:\a\1\a\${{ parameters.appname }}.zip'
