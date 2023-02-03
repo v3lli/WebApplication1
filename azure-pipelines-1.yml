@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
- -group: webapp1
+- group: webapp1
 
 extends:
   template: azure-pipelines.yml
