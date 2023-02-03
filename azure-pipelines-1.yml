@@ -1,0 +1,17 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+variables:
+ -group: webapp1
+
+extends:
+  template: azure-pipelines.yml
+  parameters:
+      iispath: $(diapath)
+      pspwd: $(Password)
+      appname: $(Webapp)
