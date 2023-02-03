@@ -44,7 +44,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '${{ parameters.solution }}'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="D:\a\1\a\Webapp.zip" /p:DeployIisAppPath="${{ parameters.iispath }}"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="D:\a\1\a\WebApplication1.zip" /p:DeployIisAppPath="${{ parameters.iispath }}"'
     platform: '${{ parameters.buildPlatform }}'
     configuration: '${{ parameters.buildConfiguration }}'
 
@@ -60,4 +60,4 @@ steps:
     ConnectionType: 'PublishProfile'
     PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*Web Deploy.pubxml'
     PublishProfilePassword: '${{ parameters.pspwd }}'
-    packageForLinux: 'D:\a\1\a\Webapp.zip'
+    packageForLinux: 'D:\a\1\a\WebApplication1.zip'
