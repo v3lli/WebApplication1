@@ -32,7 +32,10 @@ parameters:
   default: 'Any CPU'
 - name: buildConfiguration # name of the parameter; required
   type: string # data type of the parameter; required
-  default: 'Release'   
+  default: 'Release'
+- name: buildPackageLoc
+  type: string
+  default: 'D:\a\1\a\'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -44,7 +47,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '${{ parameters.solution }}'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="D:\a\1\a\WebApplication1.zip" /p:DeployIisAppPath="${{ parameters.iispath }}"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation=${{ parameters.buildPackageLoc }}${{ parameters.appname }} /p:DeployIisAppPath="${{ parameters.iispath }}"'
     platform: '${{ parameters.buildPlatform }}'
     configuration: '${{ parameters.buildConfiguration }}'
 
@@ -60,4 +63,4 @@ steps:
     ConnectionType: 'PublishProfile'
     PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*Web Deploy.pubxml'
     PublishProfilePassword: '${{ parameters.pspwd }}'
-    packageForLinux: 'D:\a\1\a\WebApplication1.zip'
+    packageForLinux: ${{ parameters.buildPackageLoc }}${{ parameters.appname }}
