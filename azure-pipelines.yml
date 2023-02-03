@@ -10,7 +10,6 @@
 #   vmImage: 'windows-latest'
 
 variables:
-  group: 'webapp1'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
