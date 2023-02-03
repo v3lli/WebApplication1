@@ -9,10 +9,10 @@
 # pool:
 #   vmImage: 'windows-latest'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+# variables:
+#   solution: '**/*.sln'
+#   buildPlatform: 'Any CPU'
+#   buildConfiguration: 'Release'
 
 parameters:
 - name: iispath # name of the parameter; required
@@ -24,25 +24,34 @@ parameters:
 - name: pspwd # name of the parameter; required
   type: string # data type of the parameter; required
   default: "UN_SET"
+- name: solution # name of the parameter; required
+  type: string # data type of the parameter; required
+  default: '**/*.sln'
+- name: buildPlatform # name of the parameter; required
+  type: string # data type of the parameter; required
+  default: 'Any CPU'
+- name: buildConfiguration # name of the parameter; required
+  type: string # data type of the parameter; required
+  default: 'Release'   
 
 steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    restoreSolution: '${{ parameters.solution }}'
 
 - task: VSBuild@1
   inputs:
-    solution: '$(solution)'
+    solution: '${{ parameters.solution }}'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="D:\a\1\a\${{ parameters.appname }}.zip" /p:DeployIisAppPath="${{ parameters.iispath }}"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    platform: '${{ parameters.buildPlatform }}'
+    configuration: '${{ parameters.buildConfiguration }}'
 
 - task: VSTest@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    platform: '${{ parameters.buildPlatform }}'
+    configuration: '${{ parameters.buildConfiguration }}'
 
 - task: PublishBuildArtifacts@1
 
